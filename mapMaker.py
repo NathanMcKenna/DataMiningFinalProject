@@ -4,23 +4,15 @@ plotly.tools.set_credentials_file(username='NathanMcKenna', api_key='L4z4eGvpGdj
 import pandas as pd
 
 df = pd.read_csv('countries.csv')
+print(df.corr())
 
 data = [ dict(
         type = 'choropleth',
         locations = df['Country Code'],
-        z = df['Biocapacity Deficit or Reserve'],
+        z = df['HDI'],
         text = df['Country'],
-        colorscale =  [
-		['0.0', 'rgb(165,0,38)'],
-		['0.115', 'rgb(165,0,38)'],
-		['0.115', 'rgb(0,153, 0)'],
-		['0.25', 'rgb(0,153, 0)'],
-		['0.25', 'rgb(51, 255, 71)'],
-		['1.0', 'rgb(51, 255, 71)']
-		 	
-    
-  ],
-        autocolorscale = False,
+        colorscale = 'Jet',
+        autocolorscale = True,
         reversescale = False,
         marker = dict(
             line = dict (
@@ -29,11 +21,11 @@ data = [ dict(
             ) ),
         colorbar = dict(
             autotick = False,
-            title = 'Footprint Ratio'),
+            title = 'HDI'),
       ) ]
 
 layout = dict(
-    title = 'Biocapacity Deficit or Reserve (Ecological Footprint)',
+    title = 'HDI of Countries',
     geo = dict(
         showframe = False,
         showcoastlines = False,
@@ -44,4 +36,4 @@ layout = dict(
 )
 
 fig = dict( data=data, layout=layout )
-py.plot( fig, validate=False, filename='EcoFootprint-world-map' )
+py.plot( fig, validate=False, filename='HDI-world-map' )
