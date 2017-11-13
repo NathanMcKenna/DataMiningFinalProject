@@ -3,17 +3,25 @@ import plotly.plotly as py
 plotly.tools.set_credentials_file(username='NathanMcKenna', api_key='L4z4eGvpGdjQC1q2jasg')
 import pandas as pd
 
-df = pd.read_csv('https://raw.githubusercontent.com/plotly/datasets/master/2014_world_gdp_with_codes.csv')
+df = pd.read_csv('countries.csv')
 
 data = [ dict(
         type = 'choropleth',
-        locations = df['CODE'],
-        z = df['GDP (BILLIONS)'],
-        text = df['COUNTRY'],
-        colorscale = [[0,"rgb(5, 10, 172)"],[0.35,"rgb(40, 60, 190)"],[0.5,"rgb(70, 100, 245)"],\
-            [0.6,"rgb(90, 120, 245)"],[0.7,"rgb(106, 137, 247)"],[1,"rgb(220, 220, 220)"]],
+        locations = df['Country Code'],
+        z = df['Biocapacity Deficit or Reserve'],
+        text = df['Country'],
+        colorscale =  [
+		['0.0', 'rgb(165,0,38)'],
+		['0.115', 'rgb(165,0,38)'],
+		['0.115', 'rgb(0,153, 0)'],
+		['0.25', 'rgb(0,153, 0)'],
+		['0.25', 'rgb(51, 255, 71)'],
+		['1.0', 'rgb(51, 255, 71)']
+		 	
+    
+  ],
         autocolorscale = False,
-        reversescale = True,
+        reversescale = False,
         marker = dict(
             line = dict (
                 color = 'rgb(180,180,180)',
@@ -21,14 +29,11 @@ data = [ dict(
             ) ),
         colorbar = dict(
             autotick = False,
-            tickprefix = '$',
-            title = 'GDP<br>Billions US$'),
+            title = 'Footprint Ratio'),
       ) ]
 
 layout = dict(
-    title = '2014 Global GDP<br>Source:\
-            <a href="https://www.cia.gov/library/publications/the-world-factbook/fields/2195.html">\
-            CIA World Factbook</a>',
+    title = 'Biocapacity Deficit or Reserve (Ecological Footprint)',
     geo = dict(
         showframe = False,
         showcoastlines = False,
@@ -39,4 +44,4 @@ layout = dict(
 )
 
 fig = dict( data=data, layout=layout )
-py.plot( fig, validate=False, filename='d3-world-map' )
+py.plot( fig, validate=False, filename='EcoFootprint-world-map' )
