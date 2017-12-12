@@ -3,16 +3,16 @@ import plotly.plotly as py
 plotly.tools.set_credentials_file(username='NathanMcKenna', api_key='L4z4eGvpGdjQC1q2jasg')
 import pandas as pd
 
-df = pd.read_csv('countries.csv')
+df = pd.read_csv('finalmerge.csv')
 print(df.corr())
 
 data = [ dict(
         type = 'choropleth',
         locations = df['Country Code'],
-        z = df['HDI'],
+        z = df['Happiness Score'],
         text = df['Country'],
-        colorscale = 'Jet',
-        autocolorscale = True,
+        colorscale = 'Earth',
+        autocolorscale = False,
         reversescale = False,
         marker = dict(
             line = dict (
@@ -21,11 +21,11 @@ data = [ dict(
             ) ),
         colorbar = dict(
             autotick = False,
-            title = 'HDI'),
+            title = 'Score'),
       ) ]
 
 layout = dict(
-    title = 'HDI of Countries',
+    title = 'Happiness Score of Countries',
     geo = dict(
         showframe = False,
         showcoastlines = False,
