@@ -3,16 +3,16 @@ import plotly.plotly as py
 plotly.tools.set_credentials_file(username='NathanMcKenna', api_key='L4z4eGvpGdjQC1q2jasg')
 import pandas as pd
 
-df = pd.read_csv('finalmerge.csv')
-print(df.corr())
+df = pd.read_csv('countries.csv')
+#print(df.corr())
 
 data = [ dict(
         type = 'choropleth',
         locations = df['Country Code'],
-        z = df['Happiness Score'],
+        z = df['GDP per Capita'],
         text = df['Country'],
-        colorscale = 'Earth',
-        autocolorscale = False,
+        colorscale = 'Reds',
+        autocolorscale = True,
         reversescale = False,
         marker = dict(
             line = dict (
@@ -21,11 +21,11 @@ data = [ dict(
             ) ),
         colorbar = dict(
             autotick = False,
-            title = 'Score'),
+            title = 'Carbon Footprint'),
       ) ]
 
 layout = dict(
-    title = 'Happiness Score of Countries',
+    title = 'GDP of Countries',
     geo = dict(
         showframe = False,
         showcoastlines = False,
@@ -36,4 +36,4 @@ layout = dict(
 )
 
 fig = dict( data=data, layout=layout )
-py.plot( fig, validate=False, filename='HDI-world-map' )
+py.plot( fig, validate=False, filename='GDP-world-map' )
